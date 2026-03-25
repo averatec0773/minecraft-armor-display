@@ -14,8 +14,9 @@ out/
 *.ipr
 *.iws
 
-# VS Code
+# VS Code / Claude Code
 .vscode/
+.claude/
 
 # macOS
 .DS_Store
