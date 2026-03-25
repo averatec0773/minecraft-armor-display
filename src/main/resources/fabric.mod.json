@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "armor_display_averatec",
+  "version": "${version}",
+  "name": "Armor Display",
+  "description": "A client-side mod that displays your numeric armor value above the armor bar. Designed for RPG servers where armor exceeds the vanilla display range. Supports dynamic positioning for multi-row health bars and absorption hearts.",
+  "authors": [
+    "averatec0773"
+  ],
+  "contact": {
+    "homepage": "https://github.com/averatec0773",
+    "sources": "https://github.com/averatec0773"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.awltk.armornum.ArmorNumClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "minecraft": "~1.21.4",
+    "java": ">=21"
+  }
+}
