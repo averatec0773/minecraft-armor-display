@@ -15,7 +15,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.awltk.armornum.ArmorNumClient"
+      "com.averatec.armordisplay.ArmorDisplayClient"
     ]
   },
   "depends": {

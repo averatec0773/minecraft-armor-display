@@ -1,4 +1,4 @@
-package com.awltk.armornum;
+package com.averatec.armordisplay;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -27,7 +27,6 @@ public class ArmorDisplayScreen extends Screen {
         int cx = this.width / 2;
         int cy = this.height / 2;
 
-        // Toggle display on/off
         this.addDrawableChild(ButtonWidget.builder(
                 buildToggleText(config.enabled),
                 btn -> {
@@ -35,10 +34,9 @@ public class ArmorDisplayScreen extends Screen {
                     config.save();
                     btn.setMessage(buildToggleText(config.enabled));
                 })
-                .dimensions(cx - 100, cy - 35, 200, 20)
+                .dimensions(cx - 100, cy - 47, 200, 20)
                 .build());
 
-        // Cycle text color preset
         this.addDrawableChild(ButtonWidget.builder(
                 buildColorText(config.textColor),
                 btn -> {
@@ -47,25 +45,23 @@ public class ArmorDisplayScreen extends Screen {
                     config.save();
                     btn.setMessage(buildColorText(config.textColor));
                 })
-                .dimensions(cx - 100, cy - 10, 200, 20)
+                .dimensions(cx - 100, cy - 22, 200, 20)
                 .build());
 
-        // Keybinding rebind button
         keybindButton = ButtonWidget.builder(
                 buildKeybindText(),
                 btn -> {
                     rebinding = true;
                     btn.setMessage(Text.literal("> Press a key... <"));
                 })
-                .dimensions(cx - 100, cy + 15, 200, 20)
+                .dimensions(cx - 100, cy + 3, 200, 20)
                 .build();
         this.addDrawableChild(keybindButton);
 
-        // Done
         this.addDrawableChild(ButtonWidget.builder(
                 Text.literal("Done"),
                 btn -> this.client.setScreen(this.parent))
-                .dimensions(cx - 50, cy + 43, 100, 20)
+                .dimensions(cx - 50, cy + 28, 100, 20)
                 .build());
     }
 
@@ -74,7 +70,7 @@ public class ArmorDisplayScreen extends Screen {
         if (rebinding) {
             rebinding = false;
             if (keyCode != GLFW.GLFW_KEY_ESCAPE) {
-                KeyBinding key = ArmorNumClient.getConfigKey();
+                KeyBinding key = ArmorDisplayClient.getConfigKey();
                 key.setBoundKey(InputUtil.Type.KEYSYM.createFromCode(keyCode));
                 KeyBinding.updateKeysByCode();
                 this.client.options.write();
@@ -90,11 +86,9 @@ public class ArmorDisplayScreen extends Screen {
         super.render(context, mouseX, mouseY, delta);
         int cx = this.width / 2;
         int cy = this.height / 2;
-        context.drawCenteredTextWithShadow(this.textRenderer, this.title, cx, cy - 65, 0xFFFFFF);
-        context.drawCenteredTextWithShadow(this.textRenderer, AUTHOR, cx, cy - 53, 0xFFFFFF);
+        context.drawCenteredTextWithShadow(this.textRenderer, this.title, cx, cy - 75, 0xFFFFFF);
+        context.drawCenteredTextWithShadow(this.textRenderer, AUTHOR, cx, cy - 62, 0xFFFFFF);
     }
-
-    // --- helpers ---
 
     private static Text buildToggleText(boolean enabled) {
         return Text.literal("Armor Display: ").append(
@@ -112,7 +106,7 @@ public class ArmorDisplayScreen extends Screen {
 
     private static Text buildKeybindText() {
         return Text.literal("Open Menu: ").append(
-                ArmorNumClient.getConfigKey().getBoundKeyLocalizedText()
+                ArmorDisplayClient.getConfigKey().getBoundKeyLocalizedText()
         );
     }
 

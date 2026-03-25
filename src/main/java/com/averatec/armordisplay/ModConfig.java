@@ -1,4 +1,4 @@
-package com.awltk.armornum;
+package com.averatec.armordisplay;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,7 +18,6 @@ public class ModConfig {
     public boolean enabled = true;
     public int textColor = 0xFFFFFF;
 
-    // Color presets: White (default) + 3 others
     public static final int[] COLOR_PRESETS = {
             0xFFFFFF, // White
             0xFFFF55, // Yellow
