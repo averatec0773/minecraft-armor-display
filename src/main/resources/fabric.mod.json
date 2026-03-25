@@ -3,13 +3,13 @@
   "id": "armor_display_averatec",
   "version": "${version}",
   "name": "Armor Display",
-  "description": "A client-side mod that displays your numeric armor value above the armor bar. Designed for RPG servers where armor exceeds the vanilla display range. Supports dynamic positioning for multi-row health bars and absorption hearts.",
+  "description": "Displays your total numeric armor value above the HUD armor bar. Supports RPG servers where armor exceeds the vanilla 30-point cap, showing both effective and actual values. Configurable color, toggle, and keybind.",
   "authors": [
     "averatec0773"
   ],
   "contact": {
-    "homepage": "https://github.com/averatec0773",
-    "sources": "https://github.com/averatec0773"
+    "homepage": "https://github.com/averatec0773/armor-display",
+    "sources": "https://github.com/averatec0773/armor-display"
   },
   "license": "MIT",
   "environment": "client",
