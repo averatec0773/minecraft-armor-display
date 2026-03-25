@@ -10,6 +10,16 @@ Useful on any server where armor values differ from vanilla — including **RPG 
 
 > Supports **English** and **简体中文 (Chinese Simplified)**.
 
+## Download
+
+[![GitHub Release](https://img.shields.io/github/v/release/averatec0773/minecraft-armor-display?label=Download&color=brightgreen)](https://github.com/averatec0773/minecraft-armor-display/releases/latest)
+
+| Mod Version | Minecraft | Fabric Loader | Download |
+|:-----------:|:---------:|:-------------:|:--------:|
+| 1.0.0 | 1.21.4 | ≥ 0.16.0 | [⬇ Download](https://github.com/averatec0773/minecraft-armor-display/releases/tag/v1.0.0) |
+
+Drop the `.jar` file into your `mods/` folder.
+
 ## Features
 
 - Displays **total armor value** above the HUD armor bar

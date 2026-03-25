@@ -8,6 +8,18 @@
 
 适用于任何护甲数值与原版不同的服务器，包括 **RPG 服务器**、**自定义装备服务器**，以及任何通过**插件**或**数据包**修改护甲属性的服务器。
 
+> 支持 **English** 和 **简体中文**。
+
+## 下载
+
+[![GitHub Release](https://img.shields.io/github/v/release/averatec0773/minecraft-armor-display?label=下载&color=brightgreen)](https://github.com/averatec0773/minecraft-armor-display/releases/latest)
+
+| 模组版本 | Minecraft | Fabric Loader | 下载 |
+|:-------:|:---------:|:-------------:|:----:|
+| 1.0.0 | 1.21.4 | ≥ 0.16.0 | [⬇ 下载](https://github.com/averatec0773/minecraft-armor-display/releases/tag/v1.0.0) |
+
+将 `.jar` 文件放入游戏的 `mods/` 文件夹即可。
+
 ## 功能
 
 - 在 HUD 护甲栏上方显示**护甲总数值**
