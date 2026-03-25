@@ -1,5 +1,7 @@
 # Armor Display
 
+![Preview](preview.png)
+
 A client-side Fabric mod for Minecraft 1.21.4 that displays your total numeric armor value above the armor bar.
 
 Useful on any server where armor values differ from vanilla — including RPG servers, custom gear servers, or any server that modifies armor through plugins or datapacks.

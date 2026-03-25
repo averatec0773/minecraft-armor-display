@@ -31,7 +31,8 @@ public class ArmorHudRenderer {
     public static void render(DrawContext context, RenderTickCounter tickCounter) {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player == null || client.options.hudHidden) return;
-        if (!ModConfig.getInstance().enabled) return;
+        ModConfig config = ModConfig.getInstance();
+        if (!config.enabled) return;
 
         PlayerEntity player = client.player;
         int raw = (int) Math.floor(calculateRawArmor(player));
@@ -44,7 +45,7 @@ public class ArmorHudRenderer {
 
         int x = context.getScaledWindowWidth() / 2 - 91;
         int y = getTextY(player, context.getScaledWindowHeight());
-        context.drawText(client.textRenderer, text, x, y, ModConfig.getInstance().textColor, true);
+        context.drawText(client.textRenderer, text, x, y, config.textColor, true);
     }
 
     /**

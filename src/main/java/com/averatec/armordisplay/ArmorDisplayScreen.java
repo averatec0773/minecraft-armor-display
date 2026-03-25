@@ -23,6 +23,7 @@ public class ArmorDisplayScreen extends Screen {
 
     @Override
     protected void init() {
+        rebinding = false;
         ModConfig config = ModConfig.getInstance();
         int cx = this.width / 2;
         int cy = this.height / 2;
