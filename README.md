@@ -1,5 +1,7 @@
 # Armor Display
 
+**English** | [简体中文](README_CN.md)
+
 ![Preview](preview.png)
 
 A **client-side** [Fabric](https://fabricmc.net/) mod for **Minecraft 1.21.4** that displays your **total numeric armor value** above the HUD armor bar.
