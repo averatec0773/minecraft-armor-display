@@ -2,13 +2,13 @@
 
 A client-side Fabric mod for Minecraft 1.21.4 that displays your total numeric armor value above the armor bar.
 
-Designed for RPG servers where armor commonly exceeds the vanilla 30-point cap.
+Useful on any server where armor values differ from vanilla — including RPG servers, custom gear servers, or any server that modifies armor through plugins or datapacks.
 
 ## Features
 
 - Displays total armor value above the HUD armor bar
 - When armor exceeds the vanilla cap of 30, shows `30 (Actual: X)` to reflect both effective and real values
-- Correctly reads set bonus armor (赋灵) synced by RPG server plugins
+- Reads server-synced armor attributes (e.g. bonus armor from plugins or gear systems)
 - Dynamically adjusts position for multi-row health bars and absorption hearts
 - Configurable text color (White / Yellow / Cyan / Green)
 - Toggle display on/off in-game

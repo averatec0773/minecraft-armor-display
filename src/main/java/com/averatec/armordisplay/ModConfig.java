@@ -25,7 +25,10 @@ public class ModConfig {
             0x55FF55, // Green
     };
     public static final String[] COLOR_NAMES = {
-            "White", "Yellow", "Cyan", "Green"
+            "color.armor_display_averatec.white",
+            "color.armor_display_averatec.yellow",
+            "color.armor_display_averatec.cyan",
+            "color.armor_display_averatec.green",
     };
 
     private static ModConfig instance;

@@ -17,7 +17,7 @@ public class ArmorDisplayScreen extends Screen {
     private ButtonWidget keybindButton;
 
     public ArmorDisplayScreen(Screen parent) {
-        super(Text.literal("Armor Display Settings"));
+        super(Text.translatable("screen.armor_display_averatec.title"));
         this.parent = parent;
     }
 
@@ -52,14 +52,14 @@ public class ArmorDisplayScreen extends Screen {
                 buildKeybindText(),
                 btn -> {
                     rebinding = true;
-                    btn.setMessage(Text.literal("> Press a key... <"));
+                    btn.setMessage(Text.translatable("screen.armor_display_averatec.rebinding"));
                 })
                 .dimensions(cx - 100, cy + 3, 200, 20)
                 .build();
         this.addDrawableChild(keybindButton);
 
         this.addDrawableChild(ButtonWidget.builder(
-                Text.literal("Done"),
+                Text.translatable("gui.done"),
                 btn -> this.client.setScreen(this.parent))
                 .dimensions(cx - 50, cy + 28, 100, 20)
                 .build());
@@ -91,21 +91,22 @@ public class ArmorDisplayScreen extends Screen {
     }
 
     private static Text buildToggleText(boolean enabled) {
-        return Text.literal("Armor Display: ").append(
-                Text.literal(enabled ? "ON" : "OFF")
+        return Text.translatable("screen.armor_display_averatec.toggle").append(
+                Text.translatable(enabled ? "screen.armor_display_averatec.toggle.on"
+                                          : "screen.armor_display_averatec.toggle.off")
                         .styled(s -> s.withColor(enabled ? 0x55FF55 : 0xFF5555))
         );
     }
 
     private static Text buildColorText(int color) {
-        String name = ModConfig.COLOR_NAMES[getColorIndex(color)];
-        return Text.literal("Text Color: ").append(
-                Text.literal(name).styled(s -> s.withColor(color))
+        String key = ModConfig.COLOR_NAMES[getColorIndex(color)];
+        return Text.translatable("screen.armor_display_averatec.color").append(
+                Text.translatable(key).styled(s -> s.withColor(color))
         );
     }
 
     private static Text buildKeybindText() {
-        return Text.literal("Open Menu: ").append(
+        return Text.translatable("screen.armor_display_averatec.keybind").append(
                 ArmorDisplayClient.getConfigKey().getBoundKeyLocalizedText()
         );
     }

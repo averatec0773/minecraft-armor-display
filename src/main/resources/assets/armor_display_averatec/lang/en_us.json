@@ -1,4 +1,20 @@
 {
   "category.armor_display_averatec": "Armor Display",
-  "key.armor_display_averatec.open_config": "Open Armor Display Config"
+  "key.armor_display_averatec.open_config": "Open Armor Display Config",
+
+  "screen.armor_display_averatec.title": "Armor Display Settings",
+  "screen.armor_display_averatec.toggle": "Armor Display: ",
+  "screen.armor_display_averatec.toggle.on": "ON",
+  "screen.armor_display_averatec.toggle.off": "OFF",
+  "screen.armor_display_averatec.color": "Text Color: ",
+  "screen.armor_display_averatec.keybind": "Open Menu: ",
+  "screen.armor_display_averatec.rebinding": "> Press a key... <",
+
+  "hud.armor_display_averatec.value": "Total Armor: %s",
+  "hud.armor_display_averatec.value_over_cap": "Total Armor: %s (Actual: %s)",
+
+  "color.armor_display_averatec.white": "White",
+  "color.armor_display_averatec.yellow": "Yellow",
+  "color.armor_display_averatec.cyan": "Cyan",
+  "color.armor_display_averatec.green": "Green"
 }

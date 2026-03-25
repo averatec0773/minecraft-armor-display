@@ -1,0 +1,20 @@
+{
+  "category.armor_display_averatec": "护甲显示",
+  "key.armor_display_averatec.open_config": "打开护甲显示配置",
+
+  "screen.armor_display_averatec.title": "护甲显示设置",
+  "screen.armor_display_averatec.toggle": "护甲显示: ",
+  "screen.armor_display_averatec.toggle.on": "开",
+  "screen.armor_display_averatec.toggle.off": "关",
+  "screen.armor_display_averatec.color": "文字颜色: ",
+  "screen.armor_display_averatec.keybind": "打开菜单: ",
+  "screen.armor_display_averatec.rebinding": "> 请按下按键... <",
+
+  "hud.armor_display_averatec.value": "总护甲: %s",
+  "hud.armor_display_averatec.value_over_cap": "总护甲: %s (实际: %s)",
+
+  "color.armor_display_averatec.white": "白色",
+  "color.armor_display_averatec.yellow": "黄色",
+  "color.armor_display_averatec.cyan": "青色",
+  "color.armor_display_averatec.green": "绿色"
+}

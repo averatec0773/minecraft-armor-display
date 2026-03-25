@@ -13,6 +13,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.HashSet;
@@ -37,9 +38,9 @@ public class ArmorHudRenderer {
         if (raw <= 0) return;
 
         int display = Math.min(raw, ARMOR_CAP);
-        String text = raw > ARMOR_CAP
-                ? "Total Armor: " + display + " (Actual: " + raw + ")"
-                : "Total Armor: " + display;
+        Text text = raw > ARMOR_CAP
+                ? Text.translatable("hud.armor_display_averatec.value_over_cap", display, raw)
+                : Text.translatable("hud.armor_display_averatec.value", display);
 
         int x = context.getScaledWindowWidth() / 2 - 91;
         int y = getTextY(player, context.getScaledWindowHeight());
