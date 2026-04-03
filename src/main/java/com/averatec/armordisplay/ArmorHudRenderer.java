@@ -51,57 +51,78 @@ public class ArmorHudRenderer {
     /**
      * Calculates total armor without the vanilla 30-point cap.
      *
-     * Sums EntityAttributeInstance modifiers directly (bypasses getValue()'s clamp),
-     * which captures server-applied bonuses like 赋灵 set effects that are not present
-     * in any item's AttributeModifiersComponent.
+     * Applies modifiers using the vanilla formula:
+     *   (base + ADD_VALUE) * (1 + sum(ADD_MULTIPLIED_BASE)) * product(1 + ADD_MULTIPLIED_TOTAL)
      *
-     * Held-item adjustment corrects for RPG server sync lag: weapons/shields may have
-     * armor in their component before the server syncs the modifier to the instance.
+     * Iterates EntityAttributeInstance modifiers directly (bypasses getValue()'s clamp),
+     * which captures server-applied bonuses not present in any item's AttributeModifiersComponent.
+     *
+     * Held-item adjustment corrects for RPG server sync lag: weapons/tools may carry
+     * armor modifiers in their component before the server syncs them to the instance.
      */
     private static double calculateRawArmor(PlayerEntity player) {
         EntityAttributeInstance instance = player.getAttributeInstance(EntityAttributes.ARMOR);
         if (instance == null) return 0;
 
-        double total = instance.getBaseValue();
+        double addValue = 0;
+        double addMultBase = 0;
+        double addMultTotal = 1.0;
+
         for (EntityAttributeModifier mod : instance.getModifiers()) {
-            total += mod.value();
+            switch (mod.operation()) {
+                case ADD_VALUE           -> addValue    += mod.value();
+                case ADD_MULTIPLIED_BASE -> addMultBase += mod.value();
+                case ADD_MULTIPLIED_TOTAL -> addMultTotal *= (1.0 + mod.value());
+            }
         }
 
+        // Held-item sync lag correction: adj = {addValue, addMultBase, addMultTotal factor}
+        double[] adj = {0.0, 0.0, 1.0};
         Set<Identifier> processedIds = new HashSet<>();
-        total += getHeldAdjustment(instance, player.getMainHandStack(), EquipmentSlot.MAINHAND, processedIds);
-        total += getHeldAdjustment(instance, player.getOffHandStack(), EquipmentSlot.OFFHAND, processedIds);
+        applyHeldAdjustment(instance, player.getMainHandStack(), EquipmentSlot.MAINHAND, processedIds, adj);
+        applyHeldAdjustment(instance, player.getOffHandStack(), EquipmentSlot.OFFHAND, processedIds, adj);
 
-        return total;
+        addValue    += adj[0];
+        addMultBase += adj[1];
+        addMultTotal *= adj[2];
+
+        return (instance.getBaseValue() + addValue) * (1.0 + addMultBase) * addMultTotal;
     }
 
     /**
-     * Returns the armor adjustment for a held item vs what is already in the instance.
-     * If the server has not yet synced the modifier: adjustment = componentValue.
-     * If already synced: adjustment = 0 (no double-count).
-     * If two held items share the same modifier ID: the second always adds componentValue.
+     * Accumulates the armor adjustment for a held item into adj[].
+     * adj[0] = ADD_VALUE delta, adj[1] = ADD_MULTIPLIED_BASE delta, adj[2] = ADD_MULTIPLIED_TOTAL factor.
+     *
+     * For each modifier in the item component not yet synced to the instance,
+     * contributes the missing amount per operation type so there is no double-count.
      */
-    private static double getHeldAdjustment(EntityAttributeInstance instance, ItemStack stack,
-                                             EquipmentSlot slot, Set<Identifier> processedIds) {
-        if (stack.isEmpty()) return 0;
+    private static void applyHeldAdjustment(EntityAttributeInstance instance, ItemStack stack,
+                                             EquipmentSlot slot, Set<Identifier> processedIds,
+                                             double[] adj) {
+        if (stack.isEmpty()) return;
         AttributeModifiersComponent comp = stack.get(DataComponentTypes.ATTRIBUTE_MODIFIERS);
-        if (comp == null) return 0;
+        if (comp == null) return;
 
-        double adjustment = 0;
         for (AttributeModifiersComponent.Entry entry : comp.modifiers()) {
             if (!entry.attribute().equals(EntityAttributes.ARMOR)) continue;
             if (!entry.slot().matches(slot)) continue;
 
             Identifier id = entry.modifier().id();
             double componentValue = entry.modifier().value();
+            EntityAttributeModifier.Operation op = entry.modifier().operation();
 
-            if (processedIds.add(id)) {
-                EntityAttributeModifier synced = instance.getModifier(id);
-                adjustment += componentValue - (synced != null ? synced.value() : 0.0);
-            } else {
-                adjustment += componentValue;
+            boolean firstSeen = processedIds.add(id);
+            EntityAttributeModifier synced = firstSeen ? instance.getModifier(id) : null;
+            double syncedValue = synced != null ? synced.value() : 0.0;
+            double delta = componentValue - syncedValue;
+
+            switch (op) {
+                case ADD_VALUE            -> adj[0] += delta;
+                case ADD_MULTIPLIED_BASE  -> adj[1] += delta;
+                case ADD_MULTIPLIED_TOTAL ->
+                        adj[2] *= (1.0 + componentValue) / (1.0 + syncedValue);
             }
         }
-        return adjustment;
     }
 
     private static int getTextY(PlayerEntity player, int scaledHeight) {
